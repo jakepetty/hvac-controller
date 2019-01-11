@@ -1,0 +1,55 @@
+#ifndef CONFIGURATION_H_
+#define CONFIGURATION_H_
+#include <Arduino.h>
+/**
+ * Debugging
+ * 
+ * Prints helpful information to serial console to help diagnose issues 
+ * Should be disabled if there are no problems being reported by serial
+ * 
+ * To disable comment out #define DEBUG_ENABLED 
+*/
+#define DEBUG_ENABLED
+#ifdef DEBUG_ENABLED
+#define SERIAL_BAUD 115200
+#endif
+
+// WIFI Settings
+#define WIFI_SSID "" // Router must be 2.4ghz ESP modules don't work with 5ghz
+#define WIFI_PASS ""
+
+// MQTT Settings
+#define MQTT_HOST ""                          // IP Address of your MQTT broker
+#define MQTT_PORT 1883                        // Default: 1883
+#define MQTT_USER ""                          // Username to login to your MQTT broker
+#define MQTT_PASS ""                          // Password to login to your MQTT broker
+#define MQTT_WILL_ONLINE "online"             // Default: online - LWT message sent to MQTT broker that tells Home Assistant the device is available
+#define MQTT_WILL_OFFLINE "offline"           // Default: offline - LWT message sent to MQTT broker that tells Home Assistant the device is not available
+#define MQTT_QOS 0                            // Default: 0 (https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/#how-does-it-work)
+#define MQTT_RETAIN true                      // Default: true (https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/#retained-messages)
+#define MQTT_CLEAN_SESSION false              // Default: false (https://www.hivemq.com/blog/mqtt-essentials-part-7-persistent-session-queuing-messages/#how-do-you-start-or-end-a-persistent-session)
+#define MQTT_DISCOVERY_PREFIX "homeassistant" // Default: homeassistant - Must match the discovery prefix in your HA MQTT configuration.
+#define MQTT_STATE_ON "ON"                    // Default: ON
+#define MQTT_STATE_OFF "OFF"                  // Default: OFF
+
+// Thermostat Modes
+#define THERMOSTAT_MODE_HEAT // Heats your home (Central Heating)
+#define THERMOSTAT_MODE_COOL // Cools your home (Central Air)
+#define THERMOSTAT_MODE_FAN  // Fans your home (Furnace Blower Only)
+
+// Relay Settings
+#define RELAY_ACTIVE LOW // Default: LOW - The pin state in which the relay is turned on ( HIGH | LOW )
+
+/**
+ * OTA Programming
+ * 
+ * Allows you to upload new firmwares without having to plug the device into the computer.
+ * This method requires your flash chip to be 2x the side of the sketch being uploaded.
+ * 1M flash chips *may* work but 4M is recommended. New flash chip may be required.
+*/
+#define OTA_ENABLED
+#ifdef OTA_ENABLED
+#define OTA_PORT 8266 // Default: 8266
+#define OTA_PASS ""
+#endif
+#endif // CONFIGURATION_H_
