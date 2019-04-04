@@ -21,7 +21,7 @@ bool WIFI::run()
         case WL_CONNECTED:
             DEBUG_PRINT(F("[OK] WIFI Connected: "), false);
             DEBUG_PRINT(WiFi.localIP(), true);
-#ifdef DEBUG_ENABLED
+#ifdef OTA_ENABLED
             ota.setup();
 #endif
             if (!MDNS.begin(MQTT_DEVICE_NAME.c_str()))
